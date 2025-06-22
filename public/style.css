@@ -1,25 +1,21 @@
-/* Global Mobile-Optimized CSS with Horizontal Scrolling Tables */
+/* Global Reset with Smooth Scrolling */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
 }
 
 body {
   background: linear-gradient(135deg, #f7f9fc 0%, #eef2f5 100%);
   color: #333;
-  padding: 20px 10px;
+  padding: 40px 20px;
   min-height: 100vh;
   animation: fadeIn 0.8s ease-out;
-  line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
 }
 
 @keyframes fadeIn {
@@ -28,14 +24,13 @@ body {
 }
 
 .container {
-  width: 100%;
+  max-width: 960px;
   margin: 0 auto;
   background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow-x: hidden;
 }
 
 .container:hover {
@@ -45,19 +40,17 @@ body {
 
 h1, h2 {
   color: #2d2e83;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   position: relative;
-  font-size: 1.5rem;
-  word-break: break-word;
 }
 
 h1::after, h2::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -5px;
-  width: 40px;
-  height: 3px;
+  bottom: -8px;
+  width: 60px;
+  height: 4px;
   background: linear-gradient(90deg, #5c67f2, #2d2e83);
   border-radius: 2px;
   animation: expandLine 0.8s ease-out forwards;
@@ -65,97 +58,45 @@ h1::after, h2::after {
 
 @keyframes expandLine {
   from { width: 0; opacity: 0; }
-  to { width: 40px; opacity: 1; }
+  to { width: 60px; opacity: 1; }
 }
 
-/* Horizontal Scrolling Tables */
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 20px 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-table {
-  width: 100%;
-  min-width: 600px; /* Minimum width before scrolling */
-  border-collapse: collapse;
-  animation: fadeIn 0.8s ease-out;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 12px 15px;
-  text-align: left;
-  white-space: nowrap;
-}
-
-th {
-  background: linear-gradient(135deg, #f1f1f9 0%, #e0e0f0 100%);
-  color: #2d2e83;
-  position: sticky;
-  top: 0;
-  font-weight: 600;
-}
-
-td {
-  background: #fff;
-}
-
-tr:nth-child(even) td {
-  background: #f9f9f9;
-}
-
-tr:hover td {
-  background: #f0f4ff;
-}
-
-/* Form Elements */
 form {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 15px;
   animation: slideUp 0.6s ease-out 0.2s both;
 }
 
 .form-group {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 15px;
   width: 100%;
 }
 
-input, select, textarea {
+input, select {
   padding: 12px 15px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  width: 100%;
-  font-size: 16px;
+  min-width: 200px;
+  font-size: 15px;
   transition: all 0.3s ease;
   background-color: #f8f9fa;
-  -webkit-appearance: none;
 }
 
-select {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 15px;
-}
-
-input:focus, select:focus, textarea:focus {
+input:focus, select:focus {
   border-color: #5c67f2;
   outline: none;
   box-shadow: 0 0 0 3px rgba(92, 103, 242, 0.2);
+  transform: translateY(-2px);
   background-color: #fff;
 }
 
-/* Buttons - Original Styles Preserved */
 button, .btn {
   padding: 12px 20px;
+  background: linear-gradient(135deg, #5c67f2 0%, #2d2e83 100%);
   color: white;
   border: none;
   border-radius: 6px;
@@ -164,26 +105,47 @@ button, .btn {
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  touch-action: manipulation;
-  text-align: center;
   position: relative;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  width: 100%;
 }
 
-.btn {
-  background: linear-gradient(135deg, #5c67f2 0%, #2d2e83 100%);
-}
-
-.btn:hover {
+button:hover, .btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
-.btn:active {
+button:active, .btn:active {
   transform: translateY(1px);
+}
+
+button::after, .btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after, .btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
 }
 
 .btn.back {
@@ -196,19 +158,73 @@ button, .btn {
   background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
 }
 
-.btn.small {
-  padding: 8px 14px;
-  font-size: 14px;
-  margin: 0;
-  white-space: nowrap;
-  width: auto;
-}
-
-/* Button Groups in Tables */
+/* Fixed button alignment in table cells */
 td .btn-group {
   display: flex;
   gap: 8px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn.small {
+  padding: 8px 14px;
+  font-size: 14px;
+  margin: 0; /* Removed margin-right to use gap instead */
+  white-space: nowrap;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 14px 16px;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  vertical-align: middle; /* Ensures content is vertically centered */
+}
+
+th {
+  background: linear-gradient(135deg, #f1f1f9 0%, #e0e0f0 100%);
+  color: #2d2e83;
+  position: sticky;
+  top: 0;
+}
+
+td {
+  background: #fff;
+}
+
+tr:nth-child(even) td {
+  background: #f9f9f9;
+}
+
+tr:hover td {
+  background: #f0f4ff;
+  transform: scale(1.01);
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.search-input:focus {
+  border-color: #5c67f2;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(92, 103, 242, 0.2);
+  transform: translateY(-2px);
+  background-color: #fff;
 }
 
 /* Loading Animation */
@@ -230,22 +246,20 @@ td .btn-group {
 /* Toast Notification */
 .toast {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 30px;
   background: #2d2e83;
   color: white;
-  padding: 15px;
+  padding: 15px 25px;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-out 2.5s forwards;
   z-index: 1000;
-  text-align: center;
 }
 
 @keyframes slideIn {
-  from { transform: translateY(100%); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes fadeOut {
@@ -253,13 +267,82 @@ td .btn-group {
   to { opacity: 0; }
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 10px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  form, .form-group {
+    flex-direction: column;
+  }
+
+  input, select, button {
+    width: 100%;
+  }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  th {
+    display: none;
+  }
+
+  td {
+    position: relative;
+    padding-left: 50%;
+    margin-bottom: 10px;
+    animation: none !important;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    color: #2d2e83;
+  }
+
+  /* Mobile button adjustments */
+  td .btn-group {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .btn.small {
+    width: 100%;
+    margin: 2px 0;
+  }
+  
+  tr:hover td {
+    transform: none;
+  }
+}
+
+/* Additional Animations */
+@keyframes slideUp {
+  from { 
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* Floating Action Button */
 .fab {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 56px;
-  height: 56px;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: linear-gradient(135deg, #5c67f2 0%, #2d2e83 100%);
   color: white;
@@ -275,101 +358,13 @@ td .btn-group {
 }
 
 .fab:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) translateY(-5px);
   box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  animation: none;
 }
 
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(92, 103, 242, 0.7); }
   70% { box-shadow: 0 0 0 15px rgba(92, 103, 242, 0); }
   100% { box-shadow: 0 0 0 0 rgba(92, 103, 242, 0); }
-}
-
-/* Additional Animations */
-@keyframes slideUp {
-  from { 
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to { 
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* Desktop Styles */
-@media (min-width: 768px) {
-  body {
-    padding: 30px 20px;
-  }
-  
-  .container {
-    max-width: 1200px;
-    padding: 30px;
-    border-radius: 12px;
-  }
-  
-  h1 {
-    font-size: 2.2rem;
-  }
-  
-  h2 {
-    font-size: 1.8rem;
-  }
-  
-  form, .form-group {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  input, select, textarea {
-    width: auto;
-    min-width: 200px;
-  }
-  
-  button, .btn {
-    width: auto;
-  }
-  
-  .table-responsive {
-    overflow-x: visible;
-  }
-  
-  table {
-    min-width: 100%;
-  }
-  
-  .toast {
-    left: auto;
-    right: 30px;
-    bottom: 30px;
-    width: auto;
-    max-width: 400px;
-  }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-  }
-  
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* iOS Specific Fixes */
-@supports (-webkit-touch-callout: none) {
-  input, select, textarea {
-    font-size: 16px;
-  }
-  
-  /* Fix for sticky hover on iOS */
-  @media (hover: none) {
-    .btn:hover, .fab:hover, tr:hover td {
-      transform: none !important;
-    }
-  }
 }
