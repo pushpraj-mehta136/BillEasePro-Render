@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard | BillEasePro</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .summary-cards {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .card {
+      flex: 1;
+      padding: 20px;
+      background: #f1f1f1;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .card h2 {
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .nav-buttons a {
+      flex: 1;
+      text-align: center;
+    }
+
+    .export-buttons,
+    .import-section {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+
+    .export-buttons button,
+    .import-section button {
+      margin-top: 10px;
+    }
+
+    .export-buttons h3,
+    .import-section h3 {
+      margin-bottom: 10px;
+    }
+
+    .import-section form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .import-section select,
+    .import-section input,
+    .import-section button {
+      padding: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container dashboard">
+    <h1>🏠 BillEasePro Dashboard</h1>
+
+    <div class="summary-cards">
+      <div class="card">
+        <p>Total Tenants</p>
+        <h2 id="tenantCount">0</h2>
+      </div>
+      <div class="card">
+        <p>Total Bills</p>
+        <h2 id="billCount">0</h2>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <a href="/tenants" class="btn">Manage Tenants</a>
+      <a href="/bills" class="btn">Manage Bills</a>
+    </div>
+
+    <div class="export-buttons">
+      <h3>⬇️ Export Data</h3>
+      <a href="/api/export/tenants" class="btn small">Download Tenants JSON</a>
+      <a href="/api/export/bills" class="btn small">Download Bills JSON</a>
+      <a href="/api/export/users" class="btn small">Download Users JSON</a>
+    </div>
+
+    <div class="import-section">
+      <h3>📂 Import Data (JSON only)</h3>
+      <form id="importForm">
+        <select id="importType" required>
+          <option value="">Select Data Type</option>
+          <option value="tenants">Tenants</option>
+          <option value="bills">Bills</option>
+          <option value="users">Users</option>
+        </select>
+        <input type="file" id="importFile" accept=".json" required />
+        <button type="submit">Import</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    async function loadCounts() {
+      const tenants = await (await fetch('/api/tenants')).json();
+      const bills = await (await fetch('/api/bills')).json();
+      document.getElementById('tenantCount').textContent = tenants.length;
+      document.getElementById('billCount').textContent = bills.length;
+    }
+
+    document.getElementById("importForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const type = document.getElementById("importType").value;
+      const file = document.getElementById("importFile").files[0];
+      if (!type || !file) return alert("Please select type and file.");
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch(`/api/import/${type}`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.ok) {
+        alert("Imported successfully!");
+        location.reload();
+      } else {
+        alert("Failed to import data.");
+      }
+    });
+
+    loadCounts();
+  </script>
+</body>
+</html>

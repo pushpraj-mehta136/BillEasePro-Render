@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: billeasepro
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    branch: main
+    envVars:
+      - key: NODE_ENV
+        value: production
